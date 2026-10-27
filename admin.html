@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Адмін-панель - Онлайн-магазин книжок</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="covers/book.ico">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin-page">
+ <header class="site-header admin-header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="covers/book.ico" alt="Лого">
+        <h1>Адмін-панель</h1>
+      </div>
+      <div class="header-actions">
+        <span class="admin-label">Ви увійшли як **Адміністратор**</span>
+        <a href="index.html" class="login-btn logout-btn">Вихід</a>
+      </div>
+    </div>
+ </header>
+
+  <div class="admin-wrapper">
+    
+    <aside class="admin-sidebar">
+      <nav class="admin-nav">
+        <a href="#" class="active">📊 Дашборд</a>
+        <a href="#">📚 Керування книгами</a>
+        <a href="#">📦 Керування замовленнями</a>
+        <a href="#">👥 Керування користувачами</a>
+        <a href="index.html">🚪 На сайт</a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <h2>Дашборд</h2>
+
+      <section class="stat-cards">
+        <div class="stat-card">
+          <h4>Нові замовлення</h4>
+          <p>12</p>
+        </div>
+        <div class="stat-card">
+          <h4>Всього книг</h4>
+          <p>156</p>
+        </div>
+        <div class="stat-card">
+          <h4>Користувачів</h4>
+          <p>42</p>
+        </div>
+      </section>
+
+     <section class="admin-section">
+  <h3>Додати нову книгу</h3>
+  <form class="crud-form" id="add-book-form">
+  <div class="form-row">
+    <input type="hidden" id="book-id">
+    
+    <input type="text" id="book-title" placeholder="Назва книги" required>
+    <input type="text" id="book-author" placeholder="Автор" required>
+    <input type="number" id="book-price" placeholder="Ціна (грн)" required>
+    <input type="number" id="book-genre" placeholder="ID Жанру (1-5)" required>
+    
+    <button type="submit" class="submit-btn" id="submit-btn">Додати</button>
+    <button type="button" class="action-btn" id="cancel-btn" style="display: none; background: gray;">Скасувати</button>
+  </div>
+</form>
+</section>
+
+     <section class="admin-section table-responsive">
+  <h3>Список книг</h3>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th>Автор</th>
+        <th>Ціна</th>
+        <th>Дії</th>
+      </tr>
+    </thead>
+    <tbody id="books-table-body">
+      </tbody>
+  </table>
+</section>
+
+    </main>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+
+ <footer>
+    <p>IC-42_appWEB-LisovaAlina-FIOT-2025 — Онлайн-магазин книжок</p>
+ </footer>
+</body>
+</html>

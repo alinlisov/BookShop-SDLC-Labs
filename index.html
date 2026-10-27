@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Онлайн-магазин книжок</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="icon" type="image/x-icon" href="covers/book.ico">
+
+ <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+ <header class="site-header">
+  <div class="header-container">
+    <div class="logo">
+      <img src="covers/book.ico" alt="Лого">
+      <h1>Онлайн-магазин книжок</h1>
+    </div>
+
+    <nav class="main-nav">
+      <a href="index.html">Каталог</a>
+            <a href="business.html">Бізнес-логіка</a>
+      <a href="contact.html">Контакти</a>
+    </nav>
+
+    <div class="header-actions">
+      <input type="text" placeholder="Пошук книжок..." class="search-input">
+      <button class="search-btn">🔍</button>
+      <button class="cart-btn">🛒</button>
+      
+    <div class="guest-actions">
+        <a href="login.html" class="login-btn">👤 Вхід</a>
+        <a href="register.html" class="register-btn">Реєстрація</a> </div>
+    </div>
+  </div>
+</header>
+
+
+  <main>
+      <h2>Каталог книжок</h2>
+    <section class="book-grid" id="books-container"></section>>
+          </section>
+
+ <h2 class="section-title">Жанри книжок</h2>
+  <div class="genres">
+    <div class="genre-card">
+      <button class="genre-header">
+        Класика <span class="arrow">▼</span>
+      </button>
+      <p class="desc">Твори, що мають високу літературну цінність і витримали перевірку часом.</p>
+      <ul class="book-list">
+        <li>«Тарас Бульба» — Микола Гоголь</li>
+        <li>"Великий Гетсбі" — Френсіс Скотт Фіцджеральд</li>
+      </ul>
+    </div>
+
+    <div class="genre-card">
+      <button class="genre-header">
+        Фантастика <span class="arrow">▼</span>
+      </button>
+      <p class="desc">Книги з елементами вигаданих світів, майбутнього або наукових відкриттів.</p>
+      <ul class="book-list">
+        <li>«Квіти для Елджернона» — Деніел Кіз</li>
+        <li>"Гаррі Поттер" — Джоан Роулінг</li>
+        <li>"Мандри Гуллівера" — Джонатан Свіфт</li>
+      </ul>
+    </div>
+
+    <div class="genre-card">
+      <button class="genre-header">
+        Детектив <span class="arrow">▼</span>
+      </button>
+      <p class="desc">Сюжет будується навколо розслідувань та загадкових подій.</p>
+      <ul class="book-list">
+        <li>«Смерть на Нілі» — Агата Крісті</li>
+        <li>"Код да Вінчі" — Ден Браун</li>
+        <li>"Вбивство у «Східному експресі» — Агата Крісті</li>
+        <li>"Пригоди Шерлока Холмса" — Артур Конан-Дойл</li>
+      </ul>
+    </div>
+
+    <div class="genre-card">
+      <button class="genre-header">
+        Філософія <span class="arrow">▼</span>
+      </button>
+      <p class="desc">Книги з глибокими роздумами про життя, суспільство та світ.</p>
+      <ul class="book-list">
+        <li>«Мистецтво війни» — Сунь-цзи</li>
+        <li>"Держава" — Платон</li>
+      </ul>
+    </div>
+
+    <div class="genre-card">
+      <button class="genre-header">
+        Роман <span class="arrow">▼</span>
+      </button>
+      <p class="desc">Художні твори, що розповідають про людські долі та почуття.</p>
+      <ul class="book-list">
+        <li>«Три товариші» — Еріх Марія Ремарк</li>
+        <li>"Джейн Ейр" — Шарлотта Бронте</li>
+        <li>"Портрет Доріана Грея" — Оскар Уайльд</li>
+        <li>"Інтернат" — Сергій Жадан</li>
+        <li>"Гордість і упередження" — Джейн Остін</li>
+      </ul>
+    </div>
+  </div>
+
+
+    <h2>Топ-3 авторів</h2>
+    <ul>
+      <li>Агата Крісті</li>
+      <li>Ден Браун</li>
+      <li>Артур Конан-Дойл</li>
+    </ul>
+        <h2>Фаворити читачів</h2>
+    <ol>
+      <li>Гаррі Поттер і філософський камінь — дуже популярна</li>
+      <li>Код да Вінчі — часто замовляють</li>
+      <li>Три товариші — популярна серед студентів</li>
+      <li>Смерть на Нілі — стабільні замовлення</li>
+      <li>Квіти для Елджернона — для цінителів</li>
+    </ol>
+
+    <!-- Форма замовлення -->
+<section class="section-bg">
+  <div class="form-container">
+        <form action="#" method="post" onsubmit="alert('Замовлення відправлено!'); return false;">
+          <h2>Форма замовлення</h2>
+      <label for="book">Оберіть книгу:</label>
+      <select id="book" name="book">
+        <option>Смерть на Нілі</option>
+        <option>Джейн Ейр</option>
+        <option>Портрет Доріана Грея</option>
+        <option>Код да Вінчі</option>
+        <option>Інтернат</option>
+        <option>Гаррі Поттер і філософський камінь</option>
+        <option>Гордість і упередження</option>
+        <option>Мандри Гуллівера</option>
+        <option>Вбивство у «Східному експресі</option>
+        <option>Квіти для Елджернона</option>
+        <option>Три товариші</option>
+        <option>Держава</option>
+        <option>Великий Гетсбі</option>
+        <option>Пригоди Шерлока Холмса. Том 1</option>
+        <option>Мистецтво війни</option>
+        <option>Тарас Бульба</option>
+      </select>
+
+    <label for="qty">Кількість:</label> <input type="number" id="qty" name="qty" min="1" max="10" required>
+<label for="name">Ваше повне ім'я:</label>
+<input type="text" id="name" name="name" required>
+
+   
+<label for="phone">Номер телефону:</label>
+<input type="tel" id="phone" name="phone" pattern="^\+380\d{9}$" 
+placeholder="+380XXXXXXXXX" required>
+
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" required>
+
+<label for="region">Адреса доставки:</label>
+<select id="region" name="region" required>
+  <option value="">-- Оберіть область --</option>
+  <option>Вінницька</option>
+  <option>Волинська</option>
+  <option>Дніпропетровська</option>
+  <option>Донецька</option>
+  <option>Житомирська</option>
+  <option>Закарпатська</option>
+  <option>Запорізька</option>
+  <option>Івано-Франківська</option>
+  <option>Київська</option>
+  <option>Кіровоградська</option>
+  <option>Луганська</option>
+  <option>Львівська</option>
+  <option>Миколаївська</option>
+  <option>Одеська</option>
+  <option>Полтавська</option>
+  <option>Рівненська</option>
+  <option>Сумська</option>
+  <option>Тернопільська</option>
+  <option>Харківська</option>
+  <option>Херсонська</option>
+  <option>Хмельницька</option>
+  <option>Черкаська</option>
+  <option>Чернівецька</option>
+  <option>Чернігівська</option>
+  <option>м. Київ</option>
+  </select>
+
+<label for="address">Місто/село/смт:</label>
+<input type="text" id="address" name="address" required>
+
+
+      <button type="submit">Замовити</button>
+    </form>
+
+</div>
+
+<hr class="section-divider">
+
+<!-- Форма для відгуків -->
+<section>
+  <div class="review-toggle-section">
+    <button class="toggle-review-btn" onclick="toggleReviewForm()">Залишити відгук</button>
+
+    <div id="reviewFormWrapper" style="display: none;" class="reviews-container">
+      <h2>Залишити відгук</h2>
+      <form id="comment-form">
+        <label for="comment-name">Ваше ім’я:</label>
+        <input type="text" id="comment-name" placeholder="Введіть ім’я" required>
+
+        <label for="comment-text">Ваш відгук:</label>
+        <textarea id="comment-text" rows="4" placeholder="Напишіть свій відгук..." required></textarea>
+
+        <button type="submit">Надіслати</button>
+      </form>
+    </div>
+
+    <!-- Тут з'являтимуться коментарі -->
+    <div id="comment-list" class="comment-list"></div>
+  </div>
+</section>
+
+ 
+  <!-- Список відгуків -->
+  <section id="comment-list" class="comment-list">
+    <article class="comment">
+      <h3>Лєна</h3>
+      <p>чотко 🙂</p>
+      <small>12.09.2025</small>
+    </article>
+    <article class="comment">
+      <h3>Кукарача</h3>
+      <p>швидка доставка</p>
+      <small>11.09.2025</small>
+    </article>
+  </section>
+</section>
+
+
+ <h2>Документація</h2>
+    <p>Детальний опис предметної галузі та бізнес-логіки можна переглянути тут: 
+      <a href="business.html">Опис бізнес-логіки</a>.
+    </p>
+
+  </main>
+
+     <footer>
+    <p>IC-42_appWEB-LisovaAlina-FIOT-2025 — Онлайн-магазин книжок</p>
+      </footer>
+
+     
+<script src="js/main.js"></script>
+</body>
+</html>

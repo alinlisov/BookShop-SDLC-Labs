@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Реєстрація - Онлайн-магазин книжок</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="covers/book.ico">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page-bg">
+
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="covers/book.ico" alt="Лого">
+        <h1>Онлайн-магазин книжок</h1>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html">Каталог</a>
+        <a href="business.html">Бізнес-логіка</a>
+        <a href="contact.html">Контакти</a>
+      </nav>
+      <div class="header-actions">
+        <input type="text" placeholder="Пошук книжок..." class="search-input">
+        <button class="search-btn">🔍</button>
+        <button class="cart-btn">🛒</button>
+        <a href="login.html" class="login-btn">Вхід</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="login-page-main">
+    
+    <form class="register-form" action="profile.html"> <h2>Створення акаунту</h2>
+      <p class="form-message">Приєднуйтесь до нашого клубу читачів!</p>
+      
+      <label for="reg-name">Ваше ім’я:</label>
+      <input type="text" id="reg-name" name="name" required placeholder="Як до вас звертатись?">
+      
+      <label for="reg-email">Email:</label>
+      <input type="email" id="reg-email" name="email" required placeholder="user@example.com">
+      
+      <label for="reg-pass">Пароль:</label>
+      <input type="password" id="reg-pass" name="password" required placeholder="Мінімум 8 символів">
+      
+      <label for="reg-pass-confirm">Підтвердіть пароль:</label>
+      <input type="password" id="reg-pass-confirm" name="password_confirm" required placeholder="Повторіть пароль">
+      
+      <div class="input-group">
+  <label for="reg-role">Хто ви?</label>
+  <select id="reg-role" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+    <option value="User">Покупець</option>
+    <option value="Admin">Адміністратор</option>
+  </select>
+</div>
+
+      <button type="submit" class="submit-btn">Зареєструватися</button>
+      
+      <p class="form-note">
+        Вже маєте акаунт? <a href="login.html">Увійти</a>
+      </p>
+    </form>
+
+  </main>
+
+  <footer>
+    <p>IC-42_appWEB-LisovaAlina-FIOT-2025 — Онлайн-магазин книжок</p>
+  </footer>
+  
+  <script src="js/register.js"></script>
+</body>
+</html>

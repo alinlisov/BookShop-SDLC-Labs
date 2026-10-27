@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: bookshop
+      POSTGRES_PASSWORD: change_me
+      POSTGRES_DB: bookshop
+    ports:
+      - "5432:5432"
+    volumes:
+      - bookshop_pgdata:/var/lib/postgresql/data
+volumes:
+  bookshop_pgdata:

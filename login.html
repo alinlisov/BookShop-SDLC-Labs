@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Вхід - Онлайн-магазин книжок</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="covers/book.ico">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page-bg">  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="covers/book.ico" alt="Лого">
+        <h1>Онлайн-магазин книжок</h1>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html">Каталог</a>
+        <a href="business.html">Бізнес-логіка</a>
+        <a href="contact.html">Контакти</a>
+      </nav>
+    </div>
+ </header>
+
+ <main class="login-page-main">
+    
+    <div class="login-card">
+      <form class="login-form">
+        <h2>Вхід до акаунту</h2>
+        <p class="form-message">Ласкаво просимо! Введіть ваші дані.</p>
+        
+        <div class="input-group">
+          <label for="user-email">Email:</label>
+          <input type="email" id="user-email" name="email" required placeholder="user@example.com">
+        </div>
+        
+        <div class="input-group">
+          <label for="user-pass">Пароль:</label>
+          <input type="password" id="user-pass" name="password" required placeholder="••••••••">
+        </div>
+
+        <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" name="remember"> Запам'ятати мене
+            </label>
+            <a href="#" class="forgot-pass">Забули пароль?</a>
+        </div>
+        
+        <button type="submit" class="submit-btn">Увійти</button>
+        <p class="form-note">Не маєте акаунту? <a href="register.html">Зареєструватись</a></p>
+    </form>
+     
+    </div>
+ </main>
+
+ <footer>
+    <p>IC-42_appWEB-LisovaAlina-FIOT-2025 — Онлайн-магазин книжок</p>
+ </footer>
+
+<script src="js/auth.js"></script>
+</body>
+</html>
