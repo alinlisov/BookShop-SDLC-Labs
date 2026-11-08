@@ -1,72 +1,297 @@
+
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Реєстрація - Онлайн-магазин книжок</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="covers/book.ico">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta
+        name="description"
+        content="Книгарня Літера — каталог книжок, замовлення, відгуки та особистий кабінет."
+    >
+    <meta name="theme-color" content="#672c3b">
+
+    <title>Створити акаунт — Літера</title>
+
+    <link rel="icon" href="covers/book.ico">
+    <link rel="stylesheet" href="css/bookshop-modern.css">
 </head>
-<body class="login-page-bg">
 
-  <header class="site-header">
-    <div class="header-container">
-      <div class="logo">
-        <img src="covers/book.ico" alt="Лого">
-        <h1>Онлайн-магазин книжок</h1>
-      </div>
-      <nav class="main-nav">
-        <a href="index.html">Каталог</a>
-        <a href="business.html">Бізнес-логіка</a>
-        <a href="contact.html">Контакти</a>
-      </nav>
-      <div class="header-actions">
-        <input type="text" placeholder="Пошук книжок..." class="search-input">
-        <button class="search-btn">🔍</button>
-        <button class="cart-btn">🛒</button>
-        <a href="login.html" class="login-btn">Вхід</a>
-      </div>
-    </div>
-  </header>
+<body class="register-page">
 
-  <main class="login-page-main">
-    
-    <form class="register-form" action="profile.html"> <h2>Створення акаунту</h2>
-      <p class="form-message">Приєднуйтесь до нашого клубу читачів!</p>
-      
-      <label for="reg-name">Ваше ім’я:</label>
-      <input type="text" id="reg-name" name="name" required placeholder="Як до вас звертатись?">
-      
-      <label for="reg-email">Email:</label>
-      <input type="email" id="reg-email" name="email" required placeholder="user@example.com">
-      
-      <label for="reg-pass">Пароль:</label>
-      <input type="password" id="reg-pass" name="password" required placeholder="Мінімум 8 символів">
-      
-      <label for="reg-pass-confirm">Підтвердіть пароль:</label>
-      <input type="password" id="reg-pass-confirm" name="password_confirm" required placeholder="Повторіть пароль">
-      
-      <div class="input-group">
-  <label for="reg-role">Хто ви?</label>
-  <select id="reg-role" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
-    <option value="User">Покупець</option>
-    <option value="Admin">Адміністратор</option>
-  </select>
-</div>
+    <!-- Посилання для швидкого переходу до основного вмісту -->
+    <a href="#main" class="skip-link">
+        Перейти до вмісту
+    </a>
 
-      <button type="submit" class="submit-btn">Зареєструватися</button>
-      
-      <p class="form-note">
-        Вже маєте акаунт? <a href="login.html">Увійти</a>
-      </p>
-    </form>
+    <!-- ШАПКА САЙТУ-->
+    <header class="site-header">
+        <div class="shell header-container">
 
-  </main>
+            <!-- Логотип -->
+            <a
+                class="brand"
+                href="index.html"
+                aria-label="Літера — на головну"
+            >
+                <span class="brand-mark" aria-hidden="true">Л</span>
 
-  <footer>
-    <p>IC-42_appWEB-LisovaAlina-FIOT-2025 — Онлайн-магазин книжок</p>
-  </footer>
-  
-  <script src="js/register.js"></script>
+                <span class="brand-copy">
+                    <span class="brand-name">Літера</span>
+                    <span class="brand-caption">книгарня онлайн</span>
+                </span>
+            </a>
+
+            <!-- Головна навігація -->
+            <nav
+                class="main-nav"
+                id="primary-navigation"
+                aria-label="Головна навігація"
+            >
+                <a href="index.html#catalog">Каталог</a>
+                <a href="index.html#genres">Жанри</a>
+                <a href="index.html#authors">Автори</a>
+                <a href="index.html#reviews">Відгуки</a>
+            </nav>
+
+            <!-- Кнопки входу та реєстрації -->
+            <div class="header-actions">
+                <div class="guest-actions">
+                    <a class="login-btn" href="login.html">
+                        Увійти
+                    </a>
+
+                    <a class="register-btn" href="register.html">
+                        Реєстрація
+                    </a>
+                </div>
+            </div>
+
+            <!-- Мобільне меню -->
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-controls="primary-navigation"
+                aria-expanded="false"
+            >
+                ☰ <span>Меню</span>
+            </button>
+
+        </div>
+    </header>
+
+    <!-- ОСНОВНИЙ ВМІСТ -->
+    <main id="main" class="shell auth-layout">
+
+        <!-- Інформаційний блок -->
+        <div class="auth-aside">
+
+            <span class="eyebrow">
+                Книгарня Літера
+            </span>
+
+            <h2>Твоя історія починається тут.</h2>
+
+            <p>
+                Зберігай свої замовлення, відкривай нові книги
+                та діліться враженнями від прочитаного.
+            </p>
+
+            <div class="auth-ornament" aria-hidden="true">
+                Читати<br>
+                більше ✦
+            </div>
+
+        </div>
+
+        <!--  ФОРМА РЕЄСТРАЦІЇ  -->
+        <div
+            class="login-card"
+            style="padding: 0; border: 0; box-shadow: none; background: transparent;"
+        >
+
+            <form class="register-form">
+
+                <span class="eyebrow">
+                    Для тих, хто любить читати
+                </span>
+
+                <h2>Створити акаунт</h2>
+
+                <!-- Повідомлення про результат реєстрації -->
+                <p
+                    class="form-message"
+                    role="status"
+                    aria-live="polite"
+                >
+                    Заповніть поля, щоб долучитися до книжкової спільноти.
+                </p>
+
+                <!-- Повне ім'я -->
+                <div class="input-group">
+                    <label for="reg-name">
+                        Повне ім’я
+                    </label>
+
+                    <input
+                        type="text"
+                        id="reg-name"
+                        required
+                        minlength="2"
+                        maxlength="150"
+                        autocomplete="name"
+                        placeholder="Ім’я та прізвище"
+                    >
+                </div>
+
+                <!-- Електронна пошта -->
+                <div class="input-group">
+                    <label for="reg-email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="reg-email"
+                        required
+                        autocomplete="email"
+                        placeholder="name@example.com"
+                    >
+                </div>
+
+                <!-- Номер телефону -->
+                <div class="input-group">
+                    <label for="reg-phone">
+                        Телефон
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="reg-phone"
+                        required
+                        pattern="(\+380[0-9]{9}|0[0-9]{9})"
+                        placeholder="+380XXXXXXXXX"
+                    >
+                </div>
+
+                <!-- Пароль -->
+                <div class="input-group">
+                    <label for="reg-pass">
+                        Пароль
+                    </label>
+
+                    <input
+                        type="password"
+                        id="reg-pass"
+                        required
+                        minlength="8"
+                        autocomplete="new-password"
+                        placeholder="Не менше 8 символів"
+                    >
+                </div>
+
+                <!-- Підтвердження пароля -->
+                <div class="input-group">
+                    <label for="reg-pass-confirm">
+                        Підтвердження пароля
+                    </label>
+
+                    <input
+                        type="password"
+                        id="reg-pass-confirm"
+                        required
+                        minlength="8"
+                        autocomplete="new-password"
+                        placeholder="Повторіть пароль"
+                    >
+                </div>
+
+                <!-- Кнопка реєстрації -->
+                <button class="submit-btn" type="submit">
+                    Зареєструватися →
+                </button>
+
+                <!-- Перехід до сторінки входу -->
+                <p class="form-note">
+                    Уже є акаунт?
+                    <a href="login.html">Увійти</a>
+                </p>
+
+            </form>
+        </div>
+
+    </main>
+
+    <!-- ПІДВАЛ САЙТУ -->
+    <footer class="site-footer">
+        <div class="shell">
+
+            <div class="footer-grid">
+
+                <!-- Інформація про книгарню -->
+                <div>
+                    <a href="index.html" class="brand">
+
+                        <span class="brand-mark" aria-hidden="true">
+                            Л
+                        </span>
+
+                        <span class="brand-copy">
+                            <span
+                                class="brand-name"
+                                style="color: #fff;"
+                            >
+                                Літера
+                            </span>
+
+                            <span
+                                class="brand-caption"
+                                style="color: #dec9be;"
+                            >
+                                книгарня онлайн
+                            </span>
+                        </span>
+                    </a>
+
+                    <p>
+                        Хороші історії починаються з однієї книги.
+                        Знайди свою наступну тут.
+                    </p>
+                </div>
+
+                <!-- Додаткова навігація -->
+                <nav
+                    class="footer-links"
+                    aria-label="Додаткова навігація"
+                >
+                    <a href="index.html#catalog">Каталог</a>
+                    <a href="index.html#genres">Жанри</a>
+                    <a href="index.html#order">Замовлення</a>
+                    <a href="index.html#reviews">Відгуки</a>
+                    <a href="business.html">Бізнес-логіка</a>
+                </nav>
+
+            </div>
+
+            <!-- Авторські права -->
+            <div class="footer-bottom">
+                © 2026 «Літера» · Навчальний проєкт BookShop · ЖЦРПЗ
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT  -->
+
+    <!-- Робота з API -->
+    <script src="js/api.js" defer></script>
+
+    <!-- Загальні функції інтерфейсу -->
+    <script src="js/modern-common.js" defer></script>
+
+    <!-- Обробка форми реєстрації -->
+    <script src="js/register.js" defer></script>
+
 </body>
 </html>

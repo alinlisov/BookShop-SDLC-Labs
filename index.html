@@ -1,256 +1,411 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>Онлайн-магазин книжок</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="icon" type="image/x-icon" href="covers/book.ico">
+  <meta name="description" content="Книгарня Літера - каталог книжок, замовлення, відгуки та особистий кабінет.">
+  <meta name="theme-color" content="#672c3b">
 
- <link rel="stylesheet" href="css/style.css">
+  <title>Книжки для натхнення - Літера</title>
 
+  <link rel="icon" href="covers/book.ico">
+  <link rel="stylesheet" href="css/bookshop-modern.css">
 </head>
-<body>
- <header class="site-header">
-  <div class="header-container">
-    <div class="logo">
-      <img src="covers/book.ico" alt="Лого">
-      <h1>Онлайн-магазин книжок</h1>
-    </div>
 
-    <nav class="main-nav">
-      <a href="index.html">Каталог</a>
-            <a href="business.html">Бізнес-логіка</a>
-      <a href="contact.html">Контакти</a>
-    </nav>
+<body class="home-page">
+  <a href="#main" class="skip-link">Перейти до вмісту</a>
 
-    <div class="header-actions">
-      <input type="text" placeholder="Пошук книжок..." class="search-input">
-      <button class="search-btn">🔍</button>
-      <button class="cart-btn">🛒</button>
-      
-    <div class="guest-actions">
-        <a href="login.html" class="login-btn">👤 Вхід</a>
-        <a href="register.html" class="register-btn">Реєстрація</a> </div>
-    </div>
-  </div>
-</header>
+  <!-- Шапка сайту -->
+  <header class="site-header">
+    <div class="shell header-container">
+      <a class="brand" href="index.html" aria-label="Літера - на головну">
+        <span class="brand-mark" aria-hidden="true">Л</span>
+        <span class="brand-copy">
+          <span class="brand-name">Літера</span>
+          <span class="brand-caption">книгарня онлайн</span>
+        </span>
+      </a>
 
+      <nav class="main-nav" id="primary-navigation" aria-label="Головна навігація">
+        <a href="index.html#catalog" class="active" aria-current="page">Каталог</a>
+        <a href="index.html#genres">Жанри</a>
+        <a href="index.html#authors">Автори</a>
+        <a href="index.html#reviews">Відгуки</a>
+      </nav>
 
-  <main>
-      <h2>Каталог книжок</h2>
-    <section class="book-grid" id="books-container"></section>>
-          </section>
+      <div class="header-actions">
+        <div class="guest-actions">
+          <a class="login-btn" href="login.html">Увійти</a>
+          <a class="register-btn" href="register.html">Реєстрація</a>
+        </div>
+      </div>
 
- <h2 class="section-title">Жанри книжок</h2>
-  <div class="genres">
-    <div class="genre-card">
-      <button class="genre-header">
-        Класика <span class="arrow">▼</span>
+      <button class="menu-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false">
+        ☰ <span>Меню</span>
       </button>
-      <p class="desc">Твори, що мають високу літературну цінність і витримали перевірку часом.</p>
-      <ul class="book-list">
-        <li>«Тарас Бульба» — Микола Гоголь</li>
-        <li>"Великий Гетсбі" — Френсіс Скотт Фіцджеральд</li>
-      </ul>
     </div>
+  </header>
 
-    <div class="genre-card">
-      <button class="genre-header">
-        Фантастика <span class="arrow">▼</span>
-      </button>
-      <p class="desc">Книги з елементами вигаданих світів, майбутнього або наукових відкриттів.</p>
-      <ul class="book-list">
-        <li>«Квіти для Елджернона» — Деніел Кіз</li>
-        <li>"Гаррі Поттер" — Джоан Роулінг</li>
-        <li>"Мандри Гуллівера" — Джонатан Свіфт</li>
-      </ul>
-    </div>
+  <!-- Основний контент -->
+  <main id="main">
 
-    <div class="genre-card">
-      <button class="genre-header">
-        Детектив <span class="arrow">▼</span>
-      </button>
-      <p class="desc">Сюжет будується навколо розслідувань та загадкових подій.</p>
-      <ul class="book-list">
-        <li>«Смерть на Нілі» — Агата Крісті</li>
-        <li>"Код да Вінчі" — Ден Браун</li>
-        <li>"Вбивство у «Східному експресі» — Агата Крісті</li>
-        <li>"Пригоди Шерлока Холмса" — Артур Конан-Дойл</li>
-      </ul>
-    </div>
+    <!-- Hero Секція -->
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <h1>Книги, що надихають нас</h1>
+          <p>Обирай і замовляй книги з любов’ю до читання.</p>
+          <div class="hero-actions">
+            <a href="#catalog" class="btn btn-primary">Дивитися каталог <span aria-hidden="true">↗</span></a>
+            <a href="#order" class="btn btn-outline">Оформити замовлення</a>
+          </div>
+        </div>
 
-    <div class="genre-card">
-      <button class="genre-header">
-        Філософія <span class="arrow">▼</span>
-      </button>
-      <p class="desc">Книги з глибокими роздумами про життя, суспільство та світ.</p>
-      <ul class="book-list">
-        <li>«Мистецтво війни» — Сунь-цзи</li>
-        <li>"Держава" — Платон</li>
-      </ul>
-    </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-disc"></div>
+          <div class="art-book one">
+            <small>класика</small>
+            <strong>Світло<br>між рядків</strong>
+            <span>Літера</span>
+          </div>
+          <div class="art-book two">
+            <small>вибір читачів</small>
+            <strong>Нова<br>історія</strong>
+            <span>Книгарня Літера</span>
+          </div>
+          <div class="art-book three">
+            <small>колекція</small>
+            <strong>Час<br>читати</strong>
+            <span>українською</span>
+          </div>
+          <div class="art-sticker">just<br>one more<br>chapter</div>
+        </div>
+      </div>
+    </section>
 
-    <div class="genre-card">
-      <button class="genre-header">
-        Роман <span class="arrow">▼</span>
-      </button>
-      <p class="desc">Художні твори, що розповідають про людські долі та почуття.</p>
-      <ul class="book-list">
-        <li>«Три товариші» — Еріх Марія Ремарк</li>
-        <li>"Джейн Ейр" — Шарлотта Бронте</li>
-        <li>"Портрет Доріана Грея" — Оскар Уайльд</li>
-        <li>"Інтернат" — Сергій Жадан</li>
-        <li>"Гордість і упередження" — Джейн Остін</li>
-      </ul>
-    </div>
-  </div>
+    <!-- Секція "Каталог" -->
+    <section class="section" id="catalog">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Наша бібліотека</span>
+            <h2>Каталог книжок</h2>
+            <p>Вибирай історію, що пасує саме тобі.</p>
+          </div>
+          <span class="results-count" id="book-count" aria-live="polite">Завантажуємо каталог...</span>
+        </div>
 
+        <!-- Панель інструментів каталогу -->
+        <div class="catalog-toolbar">
+          <label class="search-wrap" for="catalog-search">
+            <span aria-hidden="true">⌕</span>
+            <input id="catalog-search" class="search-input" type="search" autocomplete="off" placeholder="Шукати книгу або автора..." aria-label="Пошук книжок">
+            <button class="search-btn" type="button" aria-label="Знайти книжки">Знайти</button>
+          </label>
 
-    <h2>Топ-3 авторів</h2>
-    <ul>
-      <li>Агата Крісті</li>
-      <li>Ден Браун</li>
-      <li>Артур Конан-Дойл</li>
-    </ul>
-        <h2>Фаворити читачів</h2>
-    <ol>
-      <li>Гаррі Поттер і філософський камінь — дуже популярна</li>
-      <li>Код да Вінчі — часто замовляють</li>
-      <li>Три товариші — популярна серед студентів</li>
-      <li>Смерть на Нілі — стабільні замовлення</li>
-      <li>Квіти для Елджернона — для цінителів</li>
-    </ol>
+          <label class="sr-label" for="genre-filter" style="position:absolute;left:-9999px">Жанр</label>
+          <select id="genre-filter" class="filter-select" aria-label="Фільтр жанрів">
+            <option value="">Усі жанри</option>
+          </select>
 
-    <!-- Форма замовлення -->
-<section class="section-bg">
-  <div class="form-container">
-        <form action="#" method="post" onsubmit="alert('Замовлення відправлено!'); return false;">
-          <h2>Форма замовлення</h2>
-      <label for="book">Оберіть книгу:</label>
-      <select id="book" name="book">
-        <option>Смерть на Нілі</option>
-        <option>Джейн Ейр</option>
-        <option>Портрет Доріана Грея</option>
-        <option>Код да Вінчі</option>
-        <option>Інтернат</option>
-        <option>Гаррі Поттер і філософський камінь</option>
-        <option>Гордість і упередження</option>
-        <option>Мандри Гуллівера</option>
-        <option>Вбивство у «Східному експресі</option>
-        <option>Квіти для Елджернона</option>
-        <option>Три товариші</option>
-        <option>Держава</option>
-        <option>Великий Гетсбі</option>
-        <option>Пригоди Шерлока Холмса. Том 1</option>
-        <option>Мистецтво війни</option>
-        <option>Тарас Бульба</option>
-      </select>
+          <select id="sort-select" class="filter-select" aria-label="Сортування книг">
+            <option value="default">За замовчуванням</option>
+            <option value="price-low">Ціна: від нижчої</option>
+            <option value="price-high">Ціна: від вищої</option>
+            <option value="title">За назвою</option>
+          </select>
+        </div>
 
-    <label for="qty">Кількість:</label> <input type="number" id="qty" name="qty" min="1" max="10" required>
-<label for="name">Ваше повне ім'я:</label>
-<input type="text" id="name" name="name" required>
+        <!-- Сітка книг -->
+        <div class="book-grid" id="books-container" aria-live="polite">
+          <p class="empty-state">Завантажуємо книжки...</p>
+        </div>
+      </div>
+    </section>
 
-   
-<label for="phone">Номер телефону:</label>
-<input type="tel" id="phone" name="phone" pattern="^\+380\d{9}$" 
-placeholder="+380XXXXXXXXX" required>
+    <!-- Секція "Жанри" -->
+    <section class="section tinted-section" id="genres">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>Жанри, які надихають</h2>
+            <p>Розгорни картку, щоб дізнатися більше.</p>
+          </div>
+        </div>
 
-<label for="email">Email:</label>
-<input type="email" id="email" name="email" required>
+        <div class="genres">
+          <article class="genre-card">
+            <button class="genre-header" type="button" aria-expanded="false">
+              Класика<span class="arrow" aria-hidden="true">⌄</span>
+            </button>
+            <div class="genre-details" hidden>
+              <p class="desc">Книжки, які хочеться перечитувати.</p>
+              <ul class="book-list">
+                <li>Тарас Бульба</li>
+                <li>Великий Гетсбі</li>
+              </ul>
+            </div>
+          </article>
 
-<label for="region">Адреса доставки:</label>
-<select id="region" name="region" required>
-  <option value="">-- Оберіть область --</option>
-  <option>Вінницька</option>
-  <option>Волинська</option>
-  <option>Дніпропетровська</option>
-  <option>Донецька</option>
-  <option>Житомирська</option>
-  <option>Закарпатська</option>
-  <option>Запорізька</option>
-  <option>Івано-Франківська</option>
-  <option>Київська</option>
-  <option>Кіровоградська</option>
-  <option>Луганська</option>
-  <option>Львівська</option>
-  <option>Миколаївська</option>
-  <option>Одеська</option>
-  <option>Полтавська</option>
-  <option>Рівненська</option>
-  <option>Сумська</option>
-  <option>Тернопільська</option>
-  <option>Харківська</option>
-  <option>Херсонська</option>
-  <option>Хмельницька</option>
-  <option>Черкаська</option>
-  <option>Чернівецька</option>
-  <option>Чернігівська</option>
-  <option>м. Київ</option>
-  </select>
+          <article class="genre-card">
+            <button class="genre-header" type="button" aria-expanded="false">
+              Фантастика<span class="arrow" aria-hidden="true">⌄</span>
+            </button>
+            <div class="genre-details" hidden>
+              <p class="desc">Незвичайні світи, мрії та відкриття.</p>
+              <ul class="book-list">
+                <li>Квіти для Елджернона</li>
+                <li>Гаррі Поттер</li>
+              </ul>
+            </div>
+          </article>
 
-<label for="address">Місто/село/смт:</label>
-<input type="text" id="address" name="address" required>
+          <article class="genre-card">
+            <button class="genre-header" type="button" aria-expanded="false">
+              Детектив<span class="arrow" aria-hidden="true">⌄</span>
+            </button>
+            <div class="genre-details" hidden>
+              <p class="desc">Захопливі загадки та розслідування.</p>
+              <ul class="book-list">
+                <li>Смерть на Нілі</li>
+                <li>Код да Вінчі</li>
+              </ul>
+            </div>
+          </article>
 
+          <article class="genre-card">
+            <button class="genre-header" type="button" aria-expanded="false">
+              Філософія<span class="arrow" aria-hidden="true">⌄</span>
+            </button>
+            <div class="genre-details" hidden>
+              <p class="desc">Роздуми про життя, цінності та світ.</p>
+              <ul class="book-list">
+                <li>Мистецтво війни</li>
+                <li>Держава</li>
+              </ul>
+            </div>
+          </article>
 
-      <button type="submit">Замовити</button>
-    </form>
+          <article class="genre-card">
+            <button class="genre-header" type="button" aria-expanded="false">
+              Роман<span class="arrow" aria-hidden="true">⌄</span>
+            </button>
+            <div class="genre-details" hidden>
+              <p class="desc">Історії про людей і почуття.</p>
+              <ul class="book-list">
+                <li>Три товариші</li>
+                <li>Джейн Ейр</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <!-- Секція "Автори" -->
+    <section class="section" id="authors">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <h2>Автори й улюблені історії</h2>
+            <p>Невеликі тематичні добірки для натхнення.</p>
+          </div>
+        </div>
 
-<hr class="section-divider">
+        <div class="editorial-grid">
+          <div class="editorial-card">
+            <span class="eyebrow">Топ авторів</span>
+            <h3>Майстри захопливих сюжетів</h3>
+            <ol>
+              <li><span class="editorial-index">01</span>Агата Крісті</li>
+              <li><span class="editorial-index">02</span>Ден Браун</li>
+              <li><span class="editorial-index">03</span>Артур Конан-Дойл</li>
+            </ol>
+          </div>
 
-<!-- Форма для відгуків -->
-<section>
-  <div class="review-toggle-section">
-    <button class="toggle-review-btn" onclick="toggleReviewForm()">Залишити відгук</button>
+          <div class="editorial-card">
+            <span class="eyebrow">Фаворити читачів</span>
+            <h3>Що додати до списку читання</h3>
+            <ul>
+              <li><span class="editorial-index">01</span>Гаррі Поттер і філософський камінь</li>
+              <li><span class="editorial-index">02</span>Три товариші</li>
+              <li><span class="editorial-index">03</span>Квіти для Елджернона</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div id="reviewFormWrapper" style="display: none;" class="reviews-container">
-      <h2>Залишити відгук</h2>
-      <form id="comment-form">
-        <label for="comment-name">Ваше ім’я:</label>
-        <input type="text" id="comment-name" placeholder="Введіть ім’я" required>
+    <!-- Секція "Замовлення" -->
+    <section class="order-section" id="order">
+      <div class="shell order-layout">
+        <div class="order-aside">
+          <span class="eyebrow">Обери свою історію</span>
+          <h2>Твоя наступна книга за кілька кроків.</h2>
+          <p>Заповни форму, а ми збережемо замовлення. Суму буде розраховано автоматично.</p>
+          <ol class="order-steps">
+            <li><span>01</span>Вибери книгу та кількість</li>
+            <li><span>02</span>Вкажи контактні дані</li>
+            <li><span>03</span>Підтверди замовлення</li>
+          </ol>
+        </div>
 
-        <label for="comment-text">Ваш відгук:</label>
-        <textarea id="comment-text" rows="4" placeholder="Напишіть свій відгук..." required></textarea>
+        <div class="form-container">
+          <h3>Оформити замовлення</h3>
+          <p class="form-intro">Поля, позначені *, обов’язкові</p>
 
-        <button type="submit">Надіслати</button>
-      </form>
-    </div>
+          <form id="order-form" method="post">
+            <div class="form-grid">
+              <div class="form-field full">
+                <label for="book">Книга *</label>
+                <select id="book" name="book" required>
+                  <option value="">Завантаження книжок...</option>
+                </select>
+              </div>
 
-    <!-- Тут з'являтимуться коментарі -->
-    <div id="comment-list" class="comment-list"></div>
-  </div>
-</section>
+              <div class="form-field">
+                <label for="qty">Кількість *</label>
+                <input id="qty" name="qty" type="number" min="1" max="20" value="1" required>
+              </div>
 
- 
-  <!-- Список відгуків -->
-  <section id="comment-list" class="comment-list">
-    <article class="comment">
-      <h3>Лєна</h3>
-      <p>чотко 🙂</p>
-      <small>12.09.2025</small>
-    </article>
-    <article class="comment">
-      <h3>Кукарача</h3>
-      <p>швидка доставка</p>
-      <small>11.09.2025</small>
-    </article>
-  </section>
-</section>
+              <div class="form-field">
+                <label for="name">ПІБ *</label>
+                <input id="name" name="name" type="text" minlength="2" maxlength="150" autocomplete="name" placeholder="Ваше ім’я та прізвище" required>
+              </div>
 
+              <div class="form-field">
+                <label for="phone">Телефон *</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" pattern="(\+380[0-9]{9}|0[0-9]{9})" title="+380XXXXXXXXX або 0XXXXXXXXX" placeholder="+380XXXXXXXXX" required>
+              </div>
 
- <h2>Документація</h2>
-    <p>Детальний опис предметної галузі та бізнес-логіки можна переглянути тут: 
-      <a href="business.html">Опис бізнес-логіки</a>.
-    </p>
+              <div class="form-field">
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+              </div>
+
+              <div class="form-field">
+                <label for="region">Область *</label>
+                <select id="region" name="region" required>
+                  <option value="">Оберіть область</option>
+                  <option>Вінницька</option>
+                  <option>Волинська</option>
+                  <option>Дніпропетровська</option>
+                  <option>Житомирська</option>
+                  <option>Закарпатська</option>
+                  <option>Запорізька</option>
+                  <option>Івано-Франківська</option>
+                  <option>Київська</option>
+                  <option>Львівська</option>
+                  <option>Одеська</option>
+                  <option>Полтавська</option>
+                  <option>Рівненська</option>
+                  <option>Сумська</option>
+                  <option>Тернопільська</option>
+                  <option>Хмельницька</option>
+                  <option>Черкаська</option>
+                  <option>Чернігівська</option>
+                  <option>м. Київ</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="address">Місто / вулиця / будинок *</label>
+                <input id="address" name="address" type="text" minlength="5" maxlength="250" autocomplete="street-address" placeholder="м. Київ, вул. ..." required>
+              </div>
+            </div>
+
+            <div class="price-summary">
+              <span>Орієнтовна сума замовлення</span>
+              <strong id="order-total" aria-live="polite">0 грн</strong>
+            </div>
+
+            <button class="submit-btn" type="submit">Підтвердити замовлення →</button>
+            <p class="form-status" id="order-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Секція "Відгуки" -->
+    <section class="section review-section" id="reviews">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Враження читачів</span>
+            <h2>Відгуки про книги</h2>
+            <p>Ділимося думками після прочитання.</p>
+          </div>
+        </div>
+
+        <div class="review-layout">
+          <div class="review-panel">
+            <h3>Що кажуть читачі</h3>
+            <label class="form-field" for="review-book">
+              <span style="font-size:13px;font-weight:700">Оберіть книжку</span>
+              <select id="review-book" required>
+                <option value="">Завантажуємо...</option>
+              </select>
+            </label>
+            <div id="comment-list" class="comment-list" aria-live="polite">
+              <p class="bookshop-notice">Завантажуємо відгуки...</p>
+            </div>
+          </div>
+
+          <div class="review-panel">
+            <h3>Поділитися враженням</h3>
+            <p>Відгуки можуть залишати лише авторизовані читачі.</p>
+            <button class="toggle-review-btn" id="review-toggle" type="button" aria-expanded="false" aria-controls="reviewFormWrapper">
+              Написати відгук
+            </button>
+
+            <div id="reviewFormWrapper" hidden>
+              <form id="comment-form">
+                <label for="comment-text">Ваш відгук</label>
+                <textarea id="comment-text" name="comment_text" minlength="3" maxlength="2000" required placeholder="Що вам запам’яталося найбільше?"></textarea>
+                <button class="submit-btn" type="submit">Опублікувати відгук</button>
+                <p class="form-status" id="review-status" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-     <footer>
-    <p>IC-42_appWEB-LisovaAlina-FIOT-2025 — Онлайн-магазин книжок</p>
-      </footer>
+  <!-- Підвал сайту -->
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand">
+            <span class="brand-mark" aria-hidden="true">Л</span>
+            <span class="brand-copy">
+              <span class="brand-name" style="color:#fff">Літера</span>
+              <span class="brand-caption" style="color:#dec9be">книгарня онлайн</span>
+            </span>
+          </a>
+          <p>Хороші історії починаються з однієї книги. Знайди свою наступну тут.</p>
+        </div>
 
-     
-<script src="js/main.js"></script>
+        <nav class="footer-links" aria-label="Додаткова навігація">
+          <a href="index.html#catalog">Каталог</a>
+          <a href="index.html#genres">Жанри</a>
+          <a href="index.html#order">Замовлення</a>
+          <a href="index.html#reviews">Відгуки</a>
+          <a href="business.html">Бізнес-логіка</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 «Літера» · Навчальний проєкт BookShop · ЖЦРПЗ
+      </div>
+    </div>
+  </footer>
+
+  <!-- Скрипти -->
+  <script src="js/api.js" defer></script>
+  <script src="js/modern-common.js" defer></script>
+  <script src="js/modern-main.js" defer></script>
 </body>
 </html>

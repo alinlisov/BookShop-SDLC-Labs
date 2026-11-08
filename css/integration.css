@@ -1,0 +1,52 @@
+
+.bookshop-notice {
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #d9e1ef;
+  border-radius: 8px;
+  background: #f5f7fc;
+  color: #22304c;
+}
+
+.bookshop-notice[hidden] {
+  display: none;
+}
+
+.book-card .book-cover-placeholder {
+  height: 190px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 42px;
+  background: #eef0f4;
+}
+
+.book-card .book-info {
+  padding: 12px;
+}
+
+.book-card button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.review-entry {
+  padding: 10px 0;
+  border-bottom: 1px solid #d8dce5;
+}
+
+.review-entry h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.review-entry p {
+  margin: 0 0 4px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+#admin-orders-body button,
+#books-table-body button {
+  margin: 2px;
+}

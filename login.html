@@ -1,61 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>Вхід - Онлайн-магазин книжок</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="covers/book.ico">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Книгарня Літера - каталог книжок, замовлення, відгуки та особистий кабінет.">
+  <meta name="theme-color" content="#672c3b">
+
+  <title>Увійти до акаунту - Літера</title>
+
+  <link rel="icon" href="covers/book.ico">
+  <link rel="stylesheet" href="css/bookshop-modern.css">
 </head>
-<body class="login-page-bg">  <header class="site-header">
-    <div class="header-container">
-      <div class="logo">
-        <img src="covers/book.ico" alt="Лого">
-        <h1>Онлайн-магазин книжок</h1>
-      </div>
-      <nav class="main-nav">
-        <a href="index.html">Каталог</a>
-        <a href="business.html">Бізнес-логіка</a>
-        <a href="contact.html">Контакти</a>
-      </nav>
-    </div>
- </header>
 
- <main class="login-page-main">
-    
-    <div class="login-card">
-      <form class="login-form">
-        <h2>Вхід до акаунту</h2>
-        <p class="form-message">Ласкаво просимо! Введіть ваші дані.</p>
-        
-        <div class="input-group">
-          <label for="user-email">Email:</label>
-          <input type="email" id="user-email" name="email" required placeholder="user@example.com">
-        </div>
-        
-        <div class="input-group">
-          <label for="user-pass">Пароль:</label>
-          <input type="password" id="user-pass" name="password" required placeholder="••••••••">
-        </div>
+<body class="login-page">
+  <a href="#main" class="skip-link">Перейти до вмісту</a>
 
-        <div class="form-options">
-            <label class="remember-me">
-              <input type="checkbox" name="remember"> Запам'ятати мене
-            </label>
-            <a href="#" class="forgot-pass">Забули пароль?</a>
+  <!-- Шапка сайту -->
+  <header class="site-header">
+    <div class="shell header-container">
+      <a class="brand" href="index.html" aria-label="Літера - на головну">
+        <span class="brand-mark" aria-hidden="true">Л</span>
+        <span class="brand-copy">
+          <span class="brand-name">Літера</span>
+          <span class="brand-caption">книгарня онлайн</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" id="primary-navigation" aria-label="Головна навігація">
+        <a href="index.html#catalog">Каталог</a>
+        <a href="index.html#genres">Жанри</a>
+        <a href="index.html#authors">Автори</a>
+        <a href="index.html#reviews">Відгуки</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="guest-actions">
+          <a class="login-btn" href="login.html">Увійти</a>
+          <a class="register-btn" href="register.html">Реєстрація</a>
         </div>
-        
-        <button type="submit" class="submit-btn">Увійти</button>
-        <p class="form-note">Не маєте акаунту? <a href="register.html">Зареєструватись</a></p>
-    </form>
-     
+      </div>
+
+      <button class="menu-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false">
+        ☰ <span>Меню</span>
+      </button>
     </div>
- </main>
+  </header>
 
- <footer>
-    <p>IC-42_appWEB-LisovaAlina-FIOT-2025 — Онлайн-магазин книжок</p>
- </footer>
+  <!-- Форма авторизації -->
+  <main id="main" class="shell auth-layout">
+    <!-- Бічна панель з описом -->
+    <div class="auth-aside">
+      <span class="eyebrow">Книгарня Літера</span>
+      <h2>Шукай свою історію.</h2>
+      <p>Зберігай свої замовлення, відкривай нові книги та діліться враженнями від прочитаного.</p>
+      <div class="auth-ornament" aria-hidden="true">Читати<br>більше</div>
+    </div>
 
-<script src="js/auth.js"></script>
+    <!-- Картка входу -->
+    <div class="login-card" style="padding:0;border:0;box-shadow:none;background:transparent">
+      <form class="login-form">
+        <span class="eyebrow">Для тих, хто любить читати</span>
+        <h2>Увійти до акаунту</h2>
+        <p class="form-message" role="status" aria-live="polite">Раді бачити знову! Введіть свої дані.</p>
+
+        <div class="input-group">
+          <label for="user-email">Email</label>
+          <input type="email" id="user-email" required autocomplete="email" placeholder="name@example.com">
+        </div>
+
+        <div class="input-group">
+          <label for="user-pass">Пароль</label>
+          <input type="password" id="user-pass" required autocomplete="current-password" placeholder="Ваш пароль">
+        </div>
+
+        <button class="submit-btn" type="submit">Увійти →</button>
+        <p class="form-note">Ще не маєте акаунту? <a href="register.html">Створіть його</a></p>
+      </form>
+    </div>
+  </main>
+
+  <!-- Підвал сайту -->
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand">
+            <span class="brand-mark" aria-hidden="true">Л</span>
+            <span class="brand-copy">
+              <span class="brand-name" style="color:#fff">Літера</span>
+              <span class="brand-caption" style="color:#dec9be">книгарня онлайн</span>
+            </span>
+          </a>
+          <p>Хороші історії починаються з однієї книги. Знайди свою тут.</p>
+        </div>
+
+        <nav class="footer-links" aria-label="Додаткова навігація">
+          <a href="index.html#catalog">Каталог</a>
+          <a href="index.html#genres">Жанри</a>
+          <a href="index.html#order">Замовлення</a>
+          <a href="index.html#reviews">Відгуки</a>
+          <a href="business.html">Бізнес-логіка</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 «Літера» · Навчальний проєкт BookShop · ЖЦРПЗ
+      </div>
+    </div>
+  </footer>
+
+  <!-- Скрипти -->
+  <script src="js/api.js" defer></script>
+  <script src="js/modern-common.js" defer></script>
+  <script src="js/auth.js" defer></script>
 </body>
 </html>

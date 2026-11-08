@@ -1,164 +1,110 @@
-const API_URL = 'http://localhost:3000/api/books';
-let allBooks = [];
+"use strict";
+document.addEventListener("DOMContentLoaded", async () => {
+  const api = BookShopAPI;
+  if (!api.token()) { location.replace("login.html"); return; }
+  document.querySelectorAll(".logout-btn").forEach(link => link.addEventListener("click", event => {
+    event.preventDefault(); api.logout();
+  }));
+  const messageBox = document.querySelector("#admin-notice");
+  const bookBody = document.querySelector("#books-table-body");
+  const orderBody = document.querySelector("#admin-orders-body");
+  const form = document.querySelector("#add-book-form");
+  let books = [];
+  let orders = [];
+  const setMessage = text => { if (messageBox) messageBox.textContent = text; };
 
-// 1. ПЕРЕВІРКА АВТОРИЗАЦІЇ
-const token = localStorage.getItem('token');
-if (!token) {
-    window.location.href = 'login.html'; // Якщо немає токена — на вихід
-}
+  try { await api.request("/api/auth/admin-check", { authenticated: true }); }
+  catch (error) { alert("Доступ до панелі дозволений тільки адміністратору. " + error.message); location.replace("profile.html"); return; }
 
+  const td = (tr, value) => { const cell = document.createElement("td"); cell.textContent = String(value); tr.append(cell); return cell; };
+  function resetForm() {
+    form.reset(); document.querySelector("#book-id").value = "";
+    document.querySelector("#submit-btn").textContent = "Додати";
+    document.querySelector("#cancel-btn").style.display = "none";
+  }
+  document.querySelector("#cancel-btn")?.addEventListener("click", resetForm);
 
-function logout() {
-    localStorage.removeItem('token');
-    window.location.href = 'login.html';
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadBooks();
-    setupForm();
-});
-
-// 2. ЗАВАНТАЖЕННЯ (READ)
-async function loadBooks() {
-    const tableBody = document.getElementById('books-table-body');
-    
-    try {
-        const response = await fetch(API_URL);
-        allBooks = await response.json();
-
-        tableBody.innerHTML = '';
-        allBooks.forEach(book => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${book.BookID}</td>
-                <td>${book.Title}</td>
-                <td>${book.Author}</td>
-                <td>${book.Price} грн</td>
-                <td class="action-cell">
-                    <button class="action-btn edit-btn" onclick="startEdit(${book.BookID})">✏️</button>
-                    <button class="action-btn delete-btn" onclick="deleteBook(${book.BookID})">🗑️</button>
-                </td>
-            `;
-            tableBody.appendChild(row);
-        });
-
-        const countElement = document.querySelector('.stat-card:nth-child(2) p');
-        if(countElement) countElement.innerText = allBooks.length;
-
-    } catch (error) {
-        console.error('Помилка:', error);
+  function startEdit(book) {
+    document.querySelector("#book-id").value = book.id;
+    document.querySelector("#book-title").value = book.title;
+    document.querySelector("#book-author").value = book.author;
+    document.querySelector("#book-price").value = book.price;
+    document.querySelector("#book-genre").value = book.genre;
+    document.querySelector("#book-available").checked = book.is_available;
+    document.querySelector("#submit-btn").textContent = "Зберегти";
+    document.querySelector("#cancel-btn").style.display = "inline-block";
+    form.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  async function deleteBook(id) {
+    if (!confirm(`Видалити книжку №${id}? Якщо є замовлення/відгуки, сервер заборонить видалення.`)) return;
+    try { await api.request(`/api/admin/books/${id}`, { method: "DELETE", authenticated: true }); await loadBooks(); }
+    catch (err) { setMessage(err.message); }
+  }
+  function renderBooks() {
+    bookBody.replaceChildren();
+    for (const book of books) {
+      const tr = document.createElement("tr");
+      td(tr, book.id); td(tr, book.title); td(tr, book.author); td(tr, `${book.price} грн`);
+      const actions = td(tr, "");
+      const edit = document.createElement("button"); edit.type = "button"; edit.textContent = "️ Змінити";
+      edit.addEventListener("click", () => startEdit(book));
+      const del = document.createElement("button"); del.type = "button"; del.textContent = " Видалити";
+      del.addEventListener("click", () => deleteBook(book.id));
+      actions.append(edit, del); bookBody.append(tr);
     }
-}
+    const booksMetric = document.querySelector(".stat-card:nth-child(2) p");
+    if (booksMetric) booksMetric.textContent = books.length;
+  }
+  async function loadBooks() {
+    books = await api.request("/api/books"); renderBooks();
+  }
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const id = document.querySelector("#book-id").value;
+    const payload = {
+      title: document.querySelector("#book-title").value.trim(),
+      author: document.querySelector("#book-author").value.trim(),
+      genre: document.querySelector("#book-genre").value.trim(),
+      price: document.querySelector("#book-price").value,
+      is_available: document.querySelector("#book-available").checked
+    };
+    try {
+      await api.request(id ? `/api/admin/books/${id}` : "/api/admin/books", {
+        method: id ? "PATCH" : "POST", authenticated: true, body: payload
+      });
+      resetForm(); await loadBooks(); setMessage(id ? "Книжку оновлено" : "Книжку додано");
+    } catch (error) { setMessage(error.message); }
+  });
 
-// 3. РЕЖИМ РЕДАГУВАННЯ
-window.startEdit = (id) => {
-    const book = allBooks.find(b => b.BookID === id);
-    if (!book) return;
-
-    document.getElementById('book-id').value = book.BookID;
-    document.getElementById('book-title').value = book.Title;
-    document.getElementById('book-author').value = book.Author;
-    document.getElementById('book-price').value = book.Price;
-    document.getElementById('book-genre').value = book.GenreID || 1; 
-
-    const submitBtn = document.getElementById('submit-btn');
-    submitBtn.innerText = 'Зберегти зміни';
-    submitBtn.style.background = '#e63946'; 
-
-    document.getElementById('cancel-btn').style.display = 'inline-block';
-    document.querySelector('.crud-form').scrollIntoView({ behavior: 'smooth' });
-};
-
-document.getElementById('cancel-btn').addEventListener('click', () => {
-    resetForm();
-});
-
-function resetForm() {
-    const form = document.getElementById('add-book-form');
-    form.reset();
-    document.getElementById('book-id').value = ''; 
-    
-    const submitBtn = document.getElementById('submit-btn');
-    submitBtn.innerText = 'Додати';
-    submitBtn.style.background = ''; 
-    document.getElementById('cancel-btn').style.display = 'none';
-}
-
-// 4. ОБРОБКА ФОРМИ (CREATE / UPDATE) 
-function setupForm() {
-    const form = document.getElementById('add-book-form');
-    
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const id = document.getElementById('book-id').value;
-        const title = document.getElementById('book-title').value;
-        const author = document.getElementById('book-author').value;
-        const price = document.getElementById('book-price').value;
-        const genreId = document.getElementById('book-genre').value;
-
-        const bookData = { title, author, price, genreId };
-
+  function renderOrders() {
+    orderBody.replaceChildren();
+    for (const order of orders) {
+      const tr = document.createElement("tr");
+      td(tr, `#${order.id}`); td(tr, order.customer_name); td(tr, `${order.total_amount} грн`);
+      td(tr, order.status);
+      const action = td(tr, "");
+      const select = document.createElement("select");
+      for (const state of ["processing", "approved", "rejected", "cancelled"]) select.add(new Option(state, state));
+      const button = document.createElement("button"); button.type = "button"; button.textContent = "Змінити статус";
+      const finished = ["approved", "rejected", "cancelled"].includes(order.status);
+      select.disabled = finished; button.disabled = finished;
+      button.addEventListener("click", async () => {
         try {
-            let response;
-            
-            
-            const headers = { 
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` 
-            };
-
-            if (id) {
-                // РЕЖИМ РЕДАГУВАННЯ (PUT)
-                response = await fetch(`${API_URL}/${id}`, {
-                    method: 'PUT',
-                    headers: headers, 
-                    body: JSON.stringify(bookData)
-                });
-            } else {
-                // РЕЖИМ СТВОРЕННЯ (POST)
-                response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: headers, 
-                    body: JSON.stringify(bookData)
-                });
-            }
-
-            if (response.ok) {
-                alert(id ? 'Книгу оновлено!' : 'Книгу додано!');
-                resetForm(); 
-                loadBooks(); 
-            } else {
-                // Якщо токен прострочився або помилка
-                const errData = await response.json();
-                alert('Помилка: ' + errData.message);
-                if (response.status === 401 || response.status === 403) {
-                    window.location.href = 'login.html'; // Викидаємо на вхід
-                }
-            }
-        } catch (error) {
-            console.error('Помилка:', error);
-        }
-    });
-}
-
-// 5. ВИДАЛЕННЯ (DELETE) 
-window.deleteBook = async (id) => {
-    if (!confirm('Видалити цю книгу?')) return;
-    try {
-        const response = await fetch(`${API_URL}/${id}`, { 
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${token}` 
-            }
-        });
-
-        if (response.ok) {
-            loadBooks();
-        } else {
-            alert("Не вдалося видалити. Можливо, немає прав.");
-        }
-    } catch (error) {
-        console.error(error);
+          await api.request(`/api/admin/orders/${order.id}/status`, {
+            method: "PATCH", authenticated: true, body: { status: select.value }
+          });
+          await loadOrders(); setMessage(`Статус замовлення #${order.id} оновлено`);
+        } catch (error) { setMessage(error.message); }
+      });
+      action.append(select, button); orderBody.append(tr);
     }
-};
+    const newCount = document.querySelector(".stat-card:first-child p");
+    if (newCount) newCount.textContent = orders.filter(o => o.status === "new").length;
+  }
+  async function loadOrders() { orders = await api.request("/api/admin/orders", { authenticated: true }); renderOrders(); }
+
+  const usersMetric = document.querySelector(".stat-card:nth-child(3) p");
+  if (usersMetric) usersMetric.textContent = "—"; // No users-count API exists in stage 3.
+  try { await Promise.all([loadBooks(), loadOrders()]); }
+  catch (error) { setMessage(error.message); }
+});

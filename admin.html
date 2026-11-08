@@ -1,98 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>Адмін-панель - Онлайн-магазин книжок</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="covers/book.ico">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="admin-page">
- <header class="site-header admin-header">
-    <div class="header-container">
-      <div class="logo">
-        <img src="covers/book.ico" alt="Лого">
-        <h1>Адмін-панель</h1>
-      </div>
-      <div class="header-actions">
-        <span class="admin-label">Ви увійшли як **Адміністратор**</span>
-        <a href="index.html" class="login-btn logout-btn">Вихід</a>
-      </div>
-    </div>
- </header>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Книгарня Літера - каталог книжок, замовлення, відгуки та особистий кабінет.">
+  <meta name="theme-color" content="#672c3b">
 
+  <title>Адмін-панель - Літера</title>
+
+  <link rel="icon" href="covers/book.ico">
+  <link rel="stylesheet" href="css/bookshop-modern.css">
+</head>
+
+<body class="admin-page">
+  <a href="#main" class="skip-link">Перейти до вмісту</a>
+
+  <!-- Шапка адмін-панелі -->
+  <header class="site-header admin-header">
+    <div class="shell header-container">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">Л</span>
+        <span class="brand-copy">
+          <span class="brand-name">Літера</span>
+          <span class="brand-caption">панель адміністратора</span>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <span class="admin-label">Адміністративний доступ</span>
+        <a href="index.html" class="btn btn-outline">На сайт</a>
+        <a href="login.html" class="login-btn logout-btn">Вийти</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Основний контейнер адмінки -->
   <div class="admin-wrapper">
-    
+
+    <!-- Бічна навігація  -->
     <aside class="admin-sidebar">
-      <nav class="admin-nav">
-        <a href="#" class="active">📊 Дашборд</a>
-        <a href="#">📚 Керування книгами</a>
-        <a href="#">📦 Керування замовленнями</a>
-        <a href="#">👥 Керування користувачами</a>
-        <a href="index.html">🚪 На сайт</a>
+      <nav class="admin-nav" aria-label="Розділи адміністратора">
+        <a href="#admin-overview" class="active"> Огляд</a>
+        <a href="#admin-books"> Книжки</a>
+        <a href="#admin-orders"> Замовлення</a>
+        <a href="index.html">↗ Повернутися до каталогу</a>
       </nav>
     </aside>
 
-    <main class="admin-main">
-      <h2>Дашборд</h2>
+    <!-- Основний вміст -->
+    <main class="admin-main" id="main">
 
+      <!-- Заголовок та сповіщення -->
+      <div id="admin-overview">
+        <span class="eyebrow">Керування книгарнею</span>
+        <h2>Адмін-панель</h2>
+        <p id="admin-notice" class="bookshop-notice" role="status" aria-live="polite"></p>
+      </div>
+
+      <!-- Картки статистики -->
       <section class="stat-cards">
         <div class="stat-card">
           <h4>Нові замовлення</h4>
-          <p>12</p>
+          <p>—</p>
         </div>
         <div class="stat-card">
-          <h4>Всього книг</h4>
-          <p>156</p>
+          <h4>Книг у каталозі</h4>
+          <p>—</p>
         </div>
         <div class="stat-card">
           <h4>Користувачів</h4>
-          <p>42</p>
+          <p>—</p>
         </div>
       </section>
 
-     <section class="admin-section">
-  <h3>Додати нову книгу</h3>
-  <form class="crud-form" id="add-book-form">
-  <div class="form-row">
-    <input type="hidden" id="book-id">
-    
-    <input type="text" id="book-title" placeholder="Назва книги" required>
-    <input type="text" id="book-author" placeholder="Автор" required>
-    <input type="number" id="book-price" placeholder="Ціна (грн)" required>
-    <input type="number" id="book-genre" placeholder="ID Жанру (1-5)" required>
-    
-    <button type="submit" class="submit-btn" id="submit-btn">Додати</button>
-    <button type="button" class="action-btn" id="cancel-btn" style="display: none; background: gray;">Скасувати</button>
-  </div>
-</form>
-</section>
+      <!-- Управління книгами  -->
+      <section class="admin-section" id="admin-books">
+        <h3>Додати або змінити книжку</h3>
 
-     <section class="admin-section table-responsive">
-  <h3>Список книг</h3>
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Назва</th>
-        <th>Автор</th>
-        <th>Ціна</th>
-        <th>Дії</th>
-      </tr>
-    </thead>
-    <tbody id="books-table-body">
-      </tbody>
-  </table>
-</section>
+        <form class="crud-form" id="add-book-form">
+          <div class="form-row">
+            <input type="hidden" id="book-id">
+            <input type="text" id="book-title" placeholder="Назва книжки" required aria-label="Назва книжки">
+            <input type="text" id="book-author" placeholder="Автор" required aria-label="Автор">
+            <input type="number" id="book-price" step="0.01" min="0.01" placeholder="Ціна (грн)" required aria-label="Ціна">
+            <input type="text" id="book-genre" placeholder="Жанр" required aria-label="Жанр">
+
+            <label style="display:flex;align-items:center;gap:9px;font-size:13px">
+              <input type="checkbox" id="book-available" checked>У наявності
+            </label>
+
+            <button type="submit" class="submit-btn" id="submit-btn">Додати книжку</button>
+            <button type="button" class="action-btn" id="cancel-btn" style="display:none">Скасувати</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Таблиця книг -->
+      <section class="admin-section table-responsive">
+        <h3>Книги каталогу</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Назва</th>
+              <th>Автор</th>
+              <th>Ціна</th>
+              <th>Дії</th>
+            </tr>
+          </thead>
+          <tbody id="books-table-body"></tbody>
+        </table>
+      </section>
+
+      <!-- Таблиця замовлень -->
+      <section class="admin-section table-responsive" id="admin-orders">
+        <h3>Замовлення покупців</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>№</th>
+              <th>Покупець</th>
+              <th>Сума</th>
+              <th>Статус</th>
+              <th>Дія</th>
+            </tr>
+          </thead>
+          <tbody id="admin-orders-body"></tbody>
+        </table>
+      </section>
 
     </main>
   </div>
 
-  <script src="js/admin.js"></script>
-</body>
+  <!-- Підвал сайту -->
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand">
+            <span class="brand-mark" aria-hidden="true">Л</span>
+            <span class="brand-copy">
+              <span class="brand-name" style="color:#fff">Літера</span>
+              <span class="brand-caption" style="color:#dec9be">книгарня онлайн</span>
+            </span>
+          </a>
+          <p>Хороші історії починаються з однієї книги. Знайди свою тут.</p>
+        </div>
 
- <footer>
-    <p>IC-42_appWEB-LisovaAlina-FIOT-2025 — Онлайн-магазин книжок</p>
- </footer>
+        <nav class="footer-links" aria-label="Додаткова навігація">
+          <a href="index.html#catalog">Каталог</a>
+          <a href="index.html#genres">Жанри</a>
+          <a href="index.html#order">Замовлення</a>
+          <a href="index.html#reviews">Відгуки</a>
+          <a href="business.html">Бізнес-логіка</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 «Літера» · Навчальний проєкт BookShop · ЖЦРПЗ
+      </div>
+    </div>
+  </footer>
+
+  <!-- Скрипти -->
+  <script src="js/api.js" defer></script>
+  <script src="js/modern-common.js" defer></script>
+  <script src="js/admin.js" defer></script>
 </body>
 </html>

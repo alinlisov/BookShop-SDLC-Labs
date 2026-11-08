@@ -1,42 +1,24 @@
-const API_URL = 'http://localhost:3000/auth/login';
-
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.querySelector('.login-form');
-
-    if (loginForm) {
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); 
-
-            // 1. Збираємо дані з полів
-            const email = document.getElementById('user-email').value;
-            const password = document.getElementById('user-pass').value;
-
-            try {
-                // 2. Відправляємо на сервер
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    localStorage.setItem('token', data.token);
-                                       
-                    if (data.role === 'Admin') {
-                        window.location.href = 'admin.html';
-                    } else {
-                        window.location.href = 'profile.html'; 
-                    }
-                } else {
-                    
-                    alert(data.message || 'Помилка входу');
-                }
-            } catch (error) {
-                console.error('Помилка:', error);
-                alert('Сервер не відповідає. Перевірте, чи запущено бекенд.');
-            }
-        });
+"use strict";
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".login-form");
+  if (!form) return;
+  const message = form.querySelector(".form-message");
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const submit = form.querySelector("button[type=submit]");
+    submit.disabled = true;
+    try {
+      const email = document.querySelector("#user-email").value.trim();
+      const password = document.querySelector("#user-pass").value;
+      const session = await BookShopAPI.request("/api/auth/login", { method: "POST", body: { email, password } });
+      BookShopAPI.setToken(session.access_token);
+      const profile = await BookShopAPI.request("/api/auth/me", { authenticated: true });
+      location.href = profile.is_admin ? "admin.html" : "profile.html";
+    } catch (error) {
+      if (message) message.textContent = error.message;
+      else alert(error.message);
+    } finally {
+      submit.disabled = false;
     }
+  });
 });

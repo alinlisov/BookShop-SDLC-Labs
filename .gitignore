@@ -8,3 +8,6 @@ __pycache__/
 **/.env
 .vscode/
 .idea/
+.lab5-stage4-backup*/
+.bookshop-design-backup-*/
+BookShop_Visual_Upgrade/

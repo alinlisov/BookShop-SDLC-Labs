@@ -22,6 +22,7 @@ class User(Base):
     is_admin: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     orders: Mapped[list[Order]] = relationship(back_populates="user")
     reviews: Mapped[list[Review]] = relationship(back_populates="user")
+    auth_sessions: Mapped[list[AuthSession]] = relationship(back_populates="user", cascade="all, delete-orphan")
 
 
 class Book(Base):
@@ -74,3 +75,13 @@ class Review(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now_utc, nullable=False)
     user: Mapped[User] = relationship(back_populates="reviews")
     book: Mapped[Book] = relationship(back_populates="reviews")
+
+
+class AuthSession(Base):
+    """JWT session recorded in DB, so logout actually invalidates the token."""
+    __tablename__ = "auth_sessions"
+    token_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now_utc, nullable=False)
+    user: Mapped[User] = relationship(back_populates="auth_sessions")

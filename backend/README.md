@@ -1,4 +1,4 @@
-# Інтернет-магазин книжок — backend (ЛР №4)
+ Інтернет-магазин книжок — backend (ЛР №4)
 
 Цей backend є базовою структурою системи, що продовжує існуючий frontend на HTML/CSS/JavaScript.
 Архітектура: frontend → FastAPI (REST API) → SQLAlchemy → PostgreSQL.

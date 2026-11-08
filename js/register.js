@@ -1,52 +1,28 @@
-const REGISTER_URL = 'http://localhost:3000/auth/register';
-
-document.addEventListener('DOMContentLoaded', () => {
-    const registerForm = document.querySelector('.register-form');
-
-    if (registerForm) {
-        registerForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            // Збираємо дані
-            const fullName = document.getElementById('reg-name').value;
-            const email = document.getElementById('reg-email').value;
-            const password = document.getElementById('reg-pass').value;
-            
-            // 1. Читаємо вибрану роль з випадаючого списку
-            const roleSelect = document.getElementById('reg-role');
-            const selectedRole = roleSelect ? roleSelect.value : 'User'; // Якщо списку немає, то за замовчуванням User
-
-            // (Опціонально) Перевірка паролів, якщо є поле підтвердження
-            const confirmPassInput = document.getElementById('reg-pass-confirm');
-            if (confirmPassInput && password !== confirmPassInput.value) {
-                alert('Паролі не співпадають!');
-                return;
-            }
-
-            try {
-                const response = await fetch(REGISTER_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        fullName, 
-                        email, 
-                        password,
-                        role: selectedRole // 
-                    })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    alert(`Успішно! Ви зареєстровані як ${selectedRole === 'Admin' ? 'Адміністратор' : 'Покупець'}.`);
-                    window.location.href = 'login.html';
-                } else {
-                    alert('Помилка: ' + data.message);
-                }
-            } catch (error) {
-                console.error(error);
-                alert('Сервер не відповідає');
-            }
-        });
+"use strict";
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".register-form");
+  if (!form) return;
+  const message = form.querySelector(".form-message");
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const submit = form.querySelector("button[type=submit]");
+    submit.disabled = true;
+    try {
+      const body = {
+        full_name: document.querySelector("#reg-name").value.trim(),
+        email: document.querySelector("#reg-email").value.trim(),
+        phone: document.querySelector("#reg-phone").value.trim(),
+        password: document.querySelector("#reg-pass").value,
+        password_confirmation: document.querySelector("#reg-pass-confirm").value
+      };
+      await BookShopAPI.request("/api/auth/register", { method: "POST", body });
+      alert("Реєстрація успішна! Тепер увійдіть у свій акаунт.");
+      location.href = "login.html";
+    } catch (error) {
+      if (message) message.textContent = error.message;
+      else alert(error.message);
+    } finally {
+      submit.disabled = false;
     }
+  });
 });
