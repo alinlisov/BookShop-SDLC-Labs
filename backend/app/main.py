@@ -1,3 +1,15 @@
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
+
+load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+# Never silently use SQLite in the public deployment.
+if os.environ.get("APP_ENV") == "production":
+    url = os.environ.get("DATABASE_URL", "")
+    if not url.startswith("postgresql+psycopg://"):
+        raise RuntimeError("Public deployment requires PostgreSQL DATABASE_URL with psycopg driver")
+
 """BookShop API + allow-listed static frontend, laboratory 5 stage 4."""
 from contextlib import asynccontextmanager
 
@@ -20,6 +32,20 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Інтернет-магазин книжок — API", version="0.5.0", lifespan=lifespan)
+# Allowed browser origins (Render: set CORS_ORIGINS to your GitHub Pages origin).
+allowed_origins = [
+    item.strip()
+    for item in os.environ.get("CORS_ORIGINS", "https://alinlisov.github.io").split(",")
+    if item.strip()
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=False,  # Bearer JWT, not cookie authentication.
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type", "Accept"],
+)
+
 app.include_router(auth_router)
 app.include_router(books_router)
 app.include_router(orders_router)

@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from ..database import get_db
 from ..models import User, AuthSession
-from ..schemas import RegisterIn, RegisterOut, LoginIn, TokenOut, UserProfileOut, LogoutOut
+from ..schemas import RegisterIn, RegisterOut, LoginIn, TokenOut, UserProfileOut, ProfileAddressUpdate, LogoutOut
 from ..security import email_lookup, encrypt_personal_data, hash_password, decrypt_personal_data
 from ..auth_tokens import make_token, TOKEN_LIFETIME_SECONDS
 from ..dependencies import Authenticated, require_admin, require_authentication
@@ -78,8 +78,22 @@ def me(identity: Authenticated = Depends(require_authentication)) -> UserProfile
         id=user.id, full_name=user.full_name,
         email=decrypt_personal_data(user.email_encrypted),
         phone=decrypt_personal_data(user.phone_encrypted) if user.phone_encrypted else None,
+        address=decrypt_personal_data(user.address_encrypted) if user.address_encrypted else None,
         is_admin=user.is_admin,
     )
+
+# FR43_PROFILE_ADDRESS_PATCH_V1 — server-side address editor with authorization.
+@router.patch("/me/address", response_model=UserProfileOut)
+def update_profile_address(
+    payload: ProfileAddressUpdate,
+    identity: Authenticated = Depends(require_authentication),
+    db: Session = Depends(get_db),
+) -> UserProfileOut:
+    identity.user.address_encrypted = encrypt_personal_data(payload.address)
+    db.commit()
+    db.refresh(identity.user)
+    return me(identity)
+
 
 @router.post("/logout", response_model=LogoutOut)
 def logout(identity: Authenticated = Depends(require_authentication),

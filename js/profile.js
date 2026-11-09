@@ -15,6 +15,48 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (welcome) welcome.textContent = `Вітаємо, ${user.full_name}!`;
     const emailBox = document.querySelector(".profile-info p");
     if (emailBox) emailBox.textContent = user.email;
+
+    // FR-4.3: show and securely edit the signed-in customer's saved address.
+    const addressInfo = document.getElementById("saved-address");
+    const regionInput = document.getElementById("profile-region");
+    const streetInput = document.getElementById("profile-street");
+    const addressStatus = document.getElementById("profile-address-status");
+    const form = document.getElementById("profile-address-form");
+    function showAddress(address) {
+      if (addressInfo) addressInfo.textContent = address || "Адресу ще не збережено";
+    }
+    showAddress(user.address);
+    if (regionInput && streetInput && user.address) {
+      const options = Array.from(regionInput.options).filter(option => option.value)
+        .sort((a, b) => b.value.length - a.value.length);
+      const region = options.find(option => user.address.startsWith(option.value + ", "));
+      if (region) {
+        regionInput.value = region.value;
+        streetInput.value = user.address.slice(region.value.length + 2);
+      } else {
+        // Legacy address: show it intact; require user to choose a region before saving.
+        streetInput.value = user.address;
+      }
+    }
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const submit = form.querySelector('button[type="submit"]');
+      if (submit) submit.disabled = true;
+      if (addressStatus) addressStatus.textContent = "Зберігаємо адресу...";
+      try {
+        const address = `${regionInput.value}, ${streetInput.value.trim()}`;
+        const updated = await BookShopAPI.request("/api/auth/me/address", {
+          method: "PATCH", authenticated: true, body: { address }
+        });
+        showAddress(updated.address);
+        if (addressStatus) addressStatus.textContent = "Адресу успішно збережено.";
+      } catch (error) {
+        if (addressStatus) addressStatus.textContent = `Не вдалося зберегти адресу: ${error.message}`;
+      } finally {
+        if (submit) submit.disabled = false;
+      }
+    });
     const names = new Map(books.map(b => [b.id, b.title]));
     tbody.replaceChildren();
     if (!orders.length) {

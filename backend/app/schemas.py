@@ -70,7 +70,20 @@ class UserProfileOut(BaseModel):
     full_name: str
     email: EmailStr
     phone: str | None = None
+    address: str | None = None
     is_admin: bool
+
+class ProfileAddressUpdate(BaseModel):
+    address: str = Field(min_length=5, max_length=500)
+
+    @field_validator("address")
+    @classmethod
+    def normalize_address(cls, value: str) -> str:
+        cleaned = " ".join(value.split())
+        if len(cleaned) < 5:
+            raise ValueError("Адреса доставки повинна містити принаймні 5 символів")
+        return cleaned
+
 
 class LogoutOut(BaseModel):
     message: str

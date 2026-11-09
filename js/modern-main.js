@@ -226,6 +226,22 @@ document.addEventListener("DOMContentLoaded", () => {
       $("#name").value = user.full_name || "";
       $("#email").value = user.email || "";
       $("#phone").value = user.phone || "";
+      // FR-4.3: prefill delivery address from the authenticated profile.
+      if (user.address) {
+        const regionSelect = $("#region");
+        const addressInput = $("#address");
+        if (regionSelect && addressInput) {
+          const options = Array.from(regionSelect.options).filter(option => option.value)
+            .sort((a, b) => b.value.length - a.value.length);
+          const region = options.find(option => user.address.startsWith(option.value + ", "));
+          if (region) {
+            regionSelect.value = region.value;
+            addressInput.value = user.address.slice(region.value.length + 2);
+          } else {
+            addressInput.value = user.address;
+          }
+        }
+      }
     } catch (error) { console.info("Сесія недоступна:", error.message); }
   }
   loadBooks(); prefillCustomer();

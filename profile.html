@@ -58,7 +58,40 @@
       <a class="login-btn logout-btn" href="login.html" style="margin-left:auto">Вийти</a>
     </section>
 
-    <section class="profile-content">
+    <section class="profile-address-section" aria-labelledby="profile-address-title">
+    <span class="eyebrow">Мої дані</span>
+    <h2 id="profile-address-title">Адреса доставки</h2>
+    <p id="saved-address" class="profile-address-hint">Завантаження адреси...</p>
+    <form id="profile-address-form">
+      <div class="profile-address-grid">
+        <div class="form-field"><label for="profile-region">Область *</label><select id="profile-region" name="profile-region" required>
+                  <option value="">Оберіть область</option>
+                  <option>Вінницька</option>
+                  <option>Волинська</option>
+                  <option>Дніпропетровська</option>
+                  <option>Житомирська</option>
+                  <option>Закарпатська</option>
+                  <option>Запорізька</option>
+                  <option>Івано-Франківська</option>
+                  <option>Київська</option>
+                  <option>Львівська</option>
+                  <option>Одеська</option>
+                  <option>Полтавська</option>
+                  <option>Рівненська</option>
+                  <option>Сумська</option>
+                  <option>Тернопільська</option>
+                  <option>Хмельницька</option>
+                  <option>Черкаська</option>
+                  <option>Чернігівська</option>
+                  <option>м. Київ</option>
+                </select></div>
+        <div class="form-field"><label for="profile-street">Місто / вулиця / будинок *</label>
+          <input id="profile-street" type="text" minlength="5" maxlength="400" autocomplete="street-address" required placeholder="м. Хмельницький, вул. ..."></div>
+      </div>
+      <button class="submit-btn" type="submit">Зберегти адресу</button>
+      <p id="profile-address-status" class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </section><section class="profile-content">
       <div class="section-head">
         <div>
           <span class="eyebrow">Історія замовлень</span>
