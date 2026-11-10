@@ -1,0 +1,2 @@
+# Additional test dependency for Lab 6; install from backend directory
+pytest-cov>=5,<8
